@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Date;
+import java.util.Objects;
 
 public class DeleteTournamentController {
 
@@ -79,14 +80,14 @@ public class DeleteTournamentController {
                         String sportName = getSportType();
                         String fullName = getFullName();
 
-                        amountOfDeletedPatients = tournamentsTableModel.deleteByFullNameOrAddress(fullName, sportName);
+                        amountOfDeletedPatients = tournamentsTableModel.deleteByFullNameOrSportType(fullName, sportName);
                     } else if (deleteType.equals(Parameters.SEARCH_TYPES[1])) {
                         String prizeUpper = getPrizeUpper();
                         String incomeUpper = getIncomeUpper();
                         String prizeLower = getPrizeLower();
                         String incomeLower = getIncomeLower();
 
-//                        amountOfDeletedPatients = tournamentsTableModel.deleteByBirthday(prizeUpper, incomeUpper, prizeLower, incomeLower);
+                        amountOfDeletedPatients = tournamentsTableModel.deleteByPrizeOrIncome(prizeUpper, incomeUpper, prizeLower, incomeLower);
                     } else if (deleteType.equals(Parameters.SEARCH_TYPES[2])) {
                         String tournamentName = getTournamentName();
                         DateManager dateOfTournament = new DateManager(getDateOfTournament());
@@ -117,5 +118,5 @@ public class DeleteTournamentController {
 
     private String getFullName() { return textFields[5].getText(); }
 
-    private String getSportType() { return (String) comboBoxes[0].getSelectedItem(); }
+    private String getSportType() { return Objects.requireNonNull(comboBoxes[0].getSelectedItem()).toString(); }
 }

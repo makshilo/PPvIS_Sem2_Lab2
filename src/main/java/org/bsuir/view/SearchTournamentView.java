@@ -12,7 +12,7 @@ public class SearchTournamentView {
                 searchTournamentBuilder.getCardsDatePanels(), searchTournamentBuilder.getSearchByTypeComboBox(),
                 searchTournamentBuilder.getTable(), searchTournamentBuilder.getPageButtonItems(),
                 searchTournamentBuilder.getPageSpinner(), searchTournamentBuilder.getPageLabelItems(),
-                searchTournamentBuilder.getCards());
+                searchTournamentBuilder.getCards(),searchTournamentBuilder.getComboBox());
     }
 
 }

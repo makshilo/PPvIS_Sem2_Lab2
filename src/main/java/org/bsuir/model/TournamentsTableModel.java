@@ -17,13 +17,14 @@ public class TournamentsTableModel extends DefaultTableModel {
         System.out.println("Added tournament");
     }
 
-    public int deleteByFullNameOrAddress(String fullName, String sportName) {
+    public int deleteByFullNameOrSportType(String fullName, String sportName) {
 
         int counter = 0;
 
         for (int i = 0; i < getRowCount(); ++i) {
-            if (getValueAt(i, 0).equals(sportName)
-                    || getValueAt(i, 1).equals(fullName)) {
+
+            if (getValueAt(i, 0).equals(fullName)
+                    || getValueAt(i, 3).equals(sportName)) {
 
                 ++counter;
                 removeRow(i--);
@@ -83,12 +84,13 @@ public class TournamentsTableModel extends DefaultTableModel {
         return objects;
     }
 
-    public TournamentsTableModel createSubModelByFullNameAndAddress(String fullName, String address) throws ArrayIndexOutOfBoundsException {
+    public TournamentsTableModel createSubModelByFullNameOrSportType(String fullName, String sportName) throws ArrayIndexOutOfBoundsException {
         TournamentsTableModel model = new TournamentsTableModel();
 
         for (int i = 0; i < getRowCount(); ++i) {
-            if (getValueAt(i, 1).equals(address)
-                    || getValueAt(i, 0).equals(fullName)) {
+
+            if (getValueAt(i, 0).equals(fullName)
+                    || getValueAt(i, 3).equals(sportName)) {
 
                 model.addRow(parseRowToObjects(i));
             }
@@ -96,34 +98,40 @@ public class TournamentsTableModel extends DefaultTableModel {
         return model;
     }
 
-    public TournamentsTableModel createSubModelByBirthday(DateManager birthday) throws ArrayIndexOutOfBoundsException {
+    public TournamentsTableModel createSubModelByPrizeOrIncome(String prizeUpper, String incomeUpper, String prizeLower, String incomeLower) throws ArrayIndexOutOfBoundsException {
         TournamentsTableModel model = new TournamentsTableModel();
 
-        String parsedBirthday = birthday.toString();
+        double prizeUpperNumber = Double.parseDouble(prizeUpper);
+        double incomeUpperNumber = Double.parseDouble(incomeUpper);
+        Double prizeLowerNumber = Double.parseDouble(prizeLower);
+        Double incomeLowerNumber = Double.parseDouble(incomeLower);
 
         for (int i = 0; i < getRowCount(); ++i) {
+            Double currentPrize = (Double) getValueAt(i, 4);
+            Double currentIncome = (Double) getValueAt(i, 5);
 
-            if (getValueAt(i, 2).equals(parsedBirthday)) {
+            if(currentPrize > prizeLowerNumber && currentPrize < prizeUpperNumber
+                    || currentIncome > incomeLowerNumber && currentIncome<incomeUpperNumber){
+
                 model.addRow(parseRowToObjects(i));
-
             }
+
         }
         return model;
+
     }
 
-    public TournamentsTableModel createSubModelByDoctorsFullNameOrDateReceipt(String doctorsFullName,
-                                                                              DateManager dateOfReceipt) throws ArrayIndexOutOfBoundsException {
+    public TournamentsTableModel createSubModelByTournamentDateOrName(String tournamentName, DateManager tournamentDate) throws ArrayIndexOutOfBoundsException {
 
         TournamentsTableModel model = new TournamentsTableModel();
-        String date = dateOfReceipt.toString();
+        String date = tournamentDate.toString();
 
         for (int i = 0; i < getRowCount(); ++i) {
 
-            if (getValueAt(i, 3).equals(date)
-                    || getValueAt(i, 4).equals(doctorsFullName)) {
+            if (getValueAt(i, 1).equals(date)
+                    || getValueAt(i, 0).equals(tournamentName)) {
 
                 model.addRow(parseRowToObjects(i));
-
             }
         }
         return model;
@@ -152,8 +160,11 @@ public class TournamentsTableModel extends DefaultTableModel {
 
     private Tournament getTournament(int rowNumber) throws ParseException {
         Object[] objects = parseRowToObjects(rowNumber);
-        return new Tournament((String) objects[0], (String) objects[1], (String) objects[2],
-                new DateManager((String) objects[3]), (int) objects[4]);
+
+        double value =(double) objects[4];
+        int intValue = (int) value;
+        DateManager dateManager = new DateManager((String) objects[1]);
+         return new Tournament((String) objects[0],(String) objects[3],(String) objects[2],dateManager,intValue);
     }
 
     private Object[] parseRowToObjects(int rowNumber) {
@@ -179,9 +190,32 @@ public class TournamentsTableModel extends DefaultTableModel {
         }
     }
 
-    private void clearModel(){
-        for(int i=0;i<getRowCount();++i){
+    private void clearModel() {
+        for (int i = 0; i < getRowCount(); ++i) {
             removeRow(i--);
         }
+    }
+
+    public int deleteByPrizeOrIncome(String prizeUpper, String incomeUpper, String prizeLower, String incomeLower) {
+        Double prizeUpperNumber = Double.parseDouble(prizeUpper);
+        Double incomeUpperNumber = Double.parseDouble(incomeUpper);
+        Double prizeLowerNumber = Double.parseDouble(prizeLower);
+        Double incomeLowerNumber = Double.parseDouble(incomeLower);
+
+        int counter = 0;
+
+        for (int i = 0; i < getRowCount(); ++i) {
+            Double currentPrize = (Double) getValueAt(i, 4);
+            Double currentIncome = (Double) getValueAt(i, 5);
+
+            if(currentPrize > prizeLowerNumber && currentPrize < prizeUpperNumber
+                    || currentIncome > incomeLowerNumber && currentIncome<incomeUpperNumber){
+
+                ++counter;
+                removeRow(i--);
+            }
+
+        }
+        return counter;
     }
 }

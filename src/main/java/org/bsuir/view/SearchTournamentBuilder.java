@@ -146,4 +146,8 @@ public class SearchTournamentBuilder {
     public JPanel getCards(){
         return cardsBuilder.getCards();
     }
+
+    public JComboBox<String>[] getComboBox(){
+        return cardsBuilder.getComboBoxes();
+    }
 }

@@ -10,6 +10,7 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.Date;
+import java.util.Objects;
 
 public class AddTournamentController {
     private final TournamentsTableModel tournamentsTableModel;
@@ -23,13 +24,15 @@ public class AddTournamentController {
      */
     private final JDatePanelImpl[] datePanels;
     private final JButton enterButton;
+    private final JComboBox<String> comboBox;
 
     public AddTournamentController(TournamentsTableModel model, JTextField[] textFields,
-                                   JDatePanelImpl[] datePanels, JButton enterButton) {
+                                   JDatePanelImpl[] datePanels, JButton enterButton, JComboBox<String> comboBox) {
         this.tournamentsTableModel = model;
         this.textFields = textFields;
         this.datePanels = datePanels;
         this.enterButton = enterButton;
+        this.comboBox = comboBox;
         setEnterButtonAction();
     }
 
@@ -39,11 +42,11 @@ public class AddTournamentController {
             public void actionPerformed(ActionEvent e) {
                 getInformation();
 
-                if(informationCorrect()) {
-                    addTournamentToModel();
-                    SwingUtilities.getWindowAncestor(enterButton).dispose();
-                    Alert.successfulAddingAlert();
-                }
+
+                addTournamentToModel();
+                SwingUtilities.getWindowAncestor(enterButton).dispose();
+                Alert.successfulAddingAlert();
+
             }
         });
     }
@@ -71,7 +74,7 @@ public class AddTournamentController {
 
     private void getInformation() {
         String tournamentName = textFields[0].getText();
-        String sportsName = textFields[1].getText();
+        String sportsName = Objects.requireNonNull(comboBox.getSelectedItem()).toString();
         DateManager tournamentDate = new DateManager((Date) datePanels[0].getModel().getValue());
 
         String fullName = textFields[2].getText();

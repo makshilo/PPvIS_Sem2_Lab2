@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Date;
+import java.util.Objects;
 
 public class SearchTournamentController {
     /**
@@ -50,16 +51,18 @@ public class SearchTournamentController {
     private final JComboBox<String> searchByTypeComboBox;
     private final JTable table;
     private final JPanel cards;
+    private final JComboBox<String>[] comboBoxes;
 
     public SearchTournamentController(TournamentsTableModel fullModel, JButton SearchButton, JTextField[] cardsTextFields,
                                       JLabel[] cardsLabelItems, JDatePanelImpl[] datePanel,
                                       JComboBox<String> searchByTypeComboBox, JTable table, JButton[] pageButtonItems,
-                                      JSpinner pageSpinner, JLabel[] pageLabelItems, JPanel cards) {
+                                      JSpinner pageSpinner, JLabel[] pageLabelItems, JPanel cards, JComboBox<String>[] comboBoxes) {
 
         this.table = table;
         this.fullModel = fullModel;
         this.SearchButton = SearchButton;
         this.searchByTypeComboBox = searchByTypeComboBox;
+        this.comboBoxes = comboBoxes;
 
         this.cards = cards;
         this.cardsDatePanels = datePanel;
@@ -176,23 +179,27 @@ public class SearchTournamentController {
 
                     if (currentSearchType.equals(Parameters.SEARCH_TYPES[0])) {
                         String fullName = getFullName();
-                        String address = getAddress();
+                        String sportType = getSportType();
 
-                        foundModel = fullModel.createSubModelByFullNameAndAddress(fullName, address);
+                        foundModel = fullModel.createSubModelByFullNameOrSportType(fullName, sportType);
                         table.setModel(foundModel);
 
                     } else if (currentSearchType.equals(Parameters.SEARCH_TYPES[1])) {
-                        DateManager birthday = new DateManager(getBirthday());
-                        foundModel = fullModel.createSubModelByBirthday(birthday);
+                        String prizeLower = getPrizeLower();
+                        String prizeUpper = getPrizeUpper();
+                        String incomeLower = getIncomeLower();
+                        String incomeUpper = getIncomeUpper();
+
+
+                        foundModel = fullModel.createSubModelByPrizeOrIncome(prizeUpper, incomeUpper, prizeLower, incomeLower);
                         table.setModel(foundModel);
 
 
                     } else if (currentSearchType.equals(Parameters.SEARCH_TYPES[2])) {
-                        String doctorsFullName = getDoctorFullName();
-                        DateManager dateOfReceipt = new DateManager(getDateOfReceipt());
+                        String name = getTournamentName();
+                        DateManager date = new DateManager(getDateOfTournament());
 
-                        foundModel = fullModel.createSubModelByDoctorsFullNameOrDateReceipt(doctorsFullName,
-                                dateOfReceipt);
+                        foundModel = fullModel.createSubModelByTournamentDateOrName(name, date);
                         table.setModel(foundModel);
                     }
                 } catch (EmptyFieldException exception) {
@@ -216,27 +223,33 @@ public class SearchTournamentController {
         });
     }
 
+    private String getPrizeUpper() { return cardsTextFields[1].getText(); }
+
+    private String getPrizeLower() { return cardsTextFields[3].getText(); }
+
+    private String getIncomeUpper() { return cardsTextFields[2].getText(); }
+
+    private String getIncomeLower() { return cardsTextFields[4].getText(); }
+
     private int getAmountOfNotesOnTheTable() {
         return (int) pageSpinner.getValue();
     }
 
-    private Date getDateOfReceipt() {
-        return (Date) cardsDatePanels[0].getModel().getValue();
-    }
+    private Date getDateOfTournament() { return (Date) cardsDatePanels[0].getModel().getValue(); }
 
-    private String getDoctorFullName() {
-        return cardsTextFields[2].getText();
-    }
+    private String getTournamentName() { return cardsTextFields[0].getText(); }
+
+
 
     private Date getBirthday() {
         return (Date) cardsDatePanels[0].getModel().getValue();
     }
 
-    private String getAddress() {
-        return cardsTextFields[1].getText();
-    }
 
     private String getFullName() {
-        return cardsTextFields[0].getText();
+        return cardsTextFields[5].getText();
     }
+
+    private String getSportType() { return Objects.requireNonNull(comboBoxes[0].getSelectedItem()).toString(); }
+
 }

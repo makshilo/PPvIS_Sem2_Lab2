@@ -8,6 +8,6 @@ public class AddTournamentView {
     public AddTournamentView(TournamentsTableModel model){
         AddTournamentBuilder addTournamentBuilder = new AddTournamentBuilder();
         new AddTournamentController(model, addTournamentBuilder.getTextFields(), addTournamentBuilder.getDatePanels(),
-                addTournamentBuilder.getEnterButton());
+                addTournamentBuilder.getEnterButton(),addTournamentBuilder.getComboBox());
     }
 }

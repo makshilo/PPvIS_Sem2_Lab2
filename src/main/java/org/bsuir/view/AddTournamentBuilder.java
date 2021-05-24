@@ -1,6 +1,7 @@
 package org.bsuir.view;
 
 import org.bsuir.model.DateLabelFormatter;
+import org.bsuir.model.Parameters;
 import org.jdatepicker.impl.*;
 
 import javax.swing.*;
@@ -20,6 +21,7 @@ public class AddTournamentBuilder {
     private final JDatePanelImpl[] datePanels;
     private final JDatePickerImpl[] datePickers;
     private final JButton enterButton;
+    private final JComboBox<String> comboBox;
 
 
     public AddTournamentBuilder() {
@@ -28,6 +30,7 @@ public class AddTournamentBuilder {
         datePanels = new JDatePanelImpl[AMOUNT_OF_DATE_PANELS];
         datePickers = new JDatePickerImpl[AMOUNT_OF_DATE_PANELS];
         enterButton = new JButton("Enter");
+        comboBox = new JComboBox<>(Parameters.SPORT_TYPES);
 
         addLabels();
         addTextFields();
@@ -77,7 +80,7 @@ public class AddTournamentBuilder {
                 .addGroup(layout.createParallelGroup()
 
                         .addComponent(labelItems[1]))
-                .addComponent(textFields[1])
+                .addComponent(comboBox)
                 .addComponent(labelItems[2])
                 .addComponent(textFields[2])
                 .addComponent(labelItems[3])
@@ -92,7 +95,7 @@ public class AddTournamentBuilder {
                         .addComponent(labelItems[0])
                         .addComponent(textFields[0])
                         .addComponent(labelItems[1])
-                        .addComponent(textFields[1])
+                        .addComponent(comboBox)
                         .addComponent(labelItems[2])
                         .addComponent(textFields[2])
                         .addComponent(labelItems[3])
@@ -149,5 +152,9 @@ public class AddTournamentBuilder {
 
     public JTextField[] getTextFields() {
         return textFields;
+    }
+
+    public JComboBox<String> getComboBox() {
+        return comboBox;
     }
 }

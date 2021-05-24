@@ -53,9 +53,12 @@ public class TournamentsXMLWriter {
             sportName.appendChild(document.createTextNode(tournament.getSportName()));
             tournamentElement.appendChild(sportName);
 
-            Element tournamentDate = document.createElement("tournamentDate");
+            Element fullName = document.createElement("fullName");
+            fullName.appendChild(document.createTextNode(tournament.getFullName()));
+            tournamentElement.appendChild(fullName);
 
-            tournamentDate.appendChild(document.createTextNode(tournament.getFullName().toString()));
+            Element tournamentDate = document.createElement("tournamentDate");
+            tournamentDate.appendChild(document.createTextNode(tournament.getTournamentDate().toString()));
             tournamentElement.appendChild(tournamentDate);
 
             Element prize = document.createElement("prize");
