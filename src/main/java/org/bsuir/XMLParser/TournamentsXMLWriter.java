@@ -61,6 +61,7 @@ public class TournamentsXMLWriter {
             tournamentDate.appendChild(document.createTextNode(tournament.getTournamentDate().toString()));
             tournamentElement.appendChild(tournamentDate);
 
+
             Element prize = document.createElement("prize");
             prize.appendChild(document.createTextNode(String.valueOf(tournament.getPrize())));
             tournamentElement.appendChild(prize);
