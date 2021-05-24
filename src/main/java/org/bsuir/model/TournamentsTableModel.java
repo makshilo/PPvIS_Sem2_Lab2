@@ -35,24 +35,28 @@ public class TournamentsTableModel extends DefaultTableModel {
         return counter;
     }
 
-    /*public int deleteByBirthday(String prizeUpper, String prizeLower, String incomeUpper, String incomeLower ) {
+    public int deleteByPrizeOrIncome(String prizeUpper, String incomeUpper, String prizeLower, String incomeLower) {
+        Double prizeUpperNumber = Double.parseDouble(prizeUpper);
+        Double incomeUpperNumber = Double.parseDouble(incomeUpper);
+        Double prizeLowerNumber = Double.parseDouble(prizeLower);
+        Double incomeLowerNumber = Double.parseDouble(incomeLower);
+
         int counter = 0;
-        Double prizeUpperBorder = Double.parseDouble(prizeUpper);
-        Double prizeLowerBorder = Double.parseDouble(prizeLower);
-        Double incomeUpperBorder = Double.parseDouble(incomeUpper);
-        Double incomeLowerBorder = Double.parseDouble(incomeLower);
 
         for (int i = 0; i < getRowCount(); ++i) {
+            Double currentPrize = (Double) getValueAt(i, 4);
+            Double currentIncome = (Double) getValueAt(i, 5);
 
-            if (getValueAt(i, 2) > prizeLowerBorder) {
+            if(currentPrize > prizeLowerNumber && currentPrize < prizeUpperNumber
+                    || currentIncome > incomeLowerNumber && currentIncome<incomeUpperNumber){
+
                 ++counter;
                 removeRow(i--);
             }
-        }
-        System.out.println("Removed " + counter + "tournaments");
 
+        }
         return counter;
-    }*/
+    }
 
     public int tournamentNameOrDate(String tournamentName, DateManager tournamentDate) {
         int counter = 0;
@@ -161,10 +165,8 @@ public class TournamentsTableModel extends DefaultTableModel {
     private Tournament getTournament(int rowNumber) throws ParseException {
         Object[] objects = parseRowToObjects(rowNumber);
 
-        double value =(double) objects[4];
-        int intValue = (int) value;
         DateManager dateManager = new DateManager((String) objects[1]);
-         return new Tournament((String) objects[0],(String) objects[3],(String) objects[2],dateManager,intValue);
+         return new Tournament((String) objects[0],(String) objects[3],(String) objects[2],dateManager,(Double) objects[4]);
     }
 
     private Object[] parseRowToObjects(int rowNumber) {
@@ -194,28 +196,5 @@ public class TournamentsTableModel extends DefaultTableModel {
         for (int i = 0; i < getRowCount(); ++i) {
             removeRow(i--);
         }
-    }
-
-    public int deleteByPrizeOrIncome(String prizeUpper, String incomeUpper, String prizeLower, String incomeLower) {
-        Double prizeUpperNumber = Double.parseDouble(prizeUpper);
-        Double incomeUpperNumber = Double.parseDouble(incomeUpper);
-        Double prizeLowerNumber = Double.parseDouble(prizeLower);
-        Double incomeLowerNumber = Double.parseDouble(incomeLower);
-
-        int counter = 0;
-
-        for (int i = 0; i < getRowCount(); ++i) {
-            Double currentPrize = (Double) getValueAt(i, 4);
-            Double currentIncome = (Double) getValueAt(i, 5);
-
-            if(currentPrize > prizeLowerNumber && currentPrize < prizeUpperNumber
-                    || currentIncome > incomeLowerNumber && currentIncome<incomeUpperNumber){
-
-                ++counter;
-                removeRow(i--);
-            }
-
-        }
-        return counter;
     }
 }

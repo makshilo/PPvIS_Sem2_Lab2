@@ -17,42 +17,36 @@ public class MenuBarBuilder {
     private void makeMenuBar() {
         MenuItem openFileItem = new MenuItem("Open file");
         MenuItem saveAsItem = new MenuItem("Save as");
-        MenuItem addPatient = new MenuItem("Add");
-        MenuItem deletePatient = new MenuItem("Delete");
-        MenuItem searchPatient = new MenuItem("Search");
+        MenuItem addTournament = new MenuItem("Add");
+        MenuItem deleteTournament = new MenuItem("Delete");
+        MenuItem searchTournament = new MenuItem("Search");
 
-        addMenuBarItems(openFileItem, saveAsItem, addPatient, deletePatient, searchPatient);
+        addMenuBarItems(openFileItem, saveAsItem, addTournament, deleteTournament, searchTournament);
 
         Menu fileMenu = new Menu("File");
-        Menu patientMenu = new Menu("Tournament");
+        Menu tournamentMenu = new Menu("Tournament");
 
         fileMenu.add(openFileItem);
         fileMenu.add(saveAsItem);
 
-        patientMenu.add(addPatient);
-        patientMenu.add(deletePatient);
-        patientMenu.add(searchPatient);
+        tournamentMenu.add(addTournament);
+        tournamentMenu.add(deleteTournament);
+        tournamentMenu.add(searchTournament);
 
         menuBar = new MenuBar();
         menuBar.add(fileMenu);
-        menuBar.add(patientMenu);
+        menuBar.add(tournamentMenu);
 
     }
 
-    private void addMenuBarItems(MenuItem openFileItem, MenuItem saveAsItem, MenuItem addPatient, MenuItem deletePatient, MenuItem searchPatient) {
+    private void addMenuBarItems(MenuItem openFileItem, MenuItem saveAsItem, MenuItem addTournament, MenuItem deleteTournament, MenuItem searchTournament) {
         menuBarItems[0] = openFileItem;
         menuBarItems[1] = saveAsItem;
-        menuBarItems[2] = addPatient;
-        menuBarItems[3] = deletePatient;
-        menuBarItems[4] = searchPatient;
+        menuBarItems[2] = addTournament;
+        menuBarItems[3] = deleteTournament;
+        menuBarItems[4] = searchTournament;
     }
-    /**
-     * <br>[0] open file item</br>
-     * <br>[1] save as item</br>
-     * <br>[2] add patient item</br>
-     * <br>[3] delete patient item</br>
-     * <br>[4] search patient item</br>
-     */
+
     public MenuItem[] getMenuBarItems() {
         return menuBarItems;
     }

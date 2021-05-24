@@ -47,30 +47,19 @@ public class PageComponentsBuilder {
     private void addJLabels() {
         JLabel chooseAmountOfNotesOnTable = new JLabel("Choose record count");
         JLabel pageCountLabel = new JLabel("Page count: 1");
-        JLabel AmountOfPatientsLabel = new JLabel("Total record counter: 0");
+        JLabel AmountOfTournamentLabel = new JLabel("Total record counter: 0");
         JLabel currentPageLabel = new JLabel("1");
 
         labelItems[0] = chooseAmountOfNotesOnTable;
         labelItems[1] = pageCountLabel;
-        labelItems[2] = AmountOfPatientsLabel;
+        labelItems[2] = AmountOfTournamentLabel;
         labelItems[3] = currentPageLabel;
     }
-    /**
-     * <br>[0] first page button</br>
-     * <br>[1] previous page button</br>
-     * <br>[2] next page button</br>
-     * <br>[3] last page button</br>
-     */
+
     public JButton[] getButtonItems() {
         return buttonItems;
     }
 
-    /**
-     * <br>[0] amount of notes on the table</br>
-     * <br>[1] amount of pages</br>
-     * <br>[2] amount of patients</br>
-     * <br>[3] current page</br>
-     */
     public JLabel[] getLabelItems() {
         return labelItems;
     }

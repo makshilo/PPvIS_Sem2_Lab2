@@ -12,7 +12,7 @@ public class Alert {
     }
 
     private static void successfulDeletionAlert(int amount) {
-        JOptionPane.showMessageDialog(null, amount + " patients was successfully removed");
+        JOptionPane.showMessageDialog(null, amount + " tournaments was successfully removed");
     }
 
     private static void unsuccessfulDeletionAlert() {

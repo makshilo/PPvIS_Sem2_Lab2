@@ -68,7 +68,7 @@ public class DeleteTournamentController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    int amountOfDeletedPatients = 0;
+                    int amountOfDeletedTournaments = 0;
 
                     String deleteType = (String) deleteByTypeComboBox.getSelectedItem();
 
@@ -80,23 +80,23 @@ public class DeleteTournamentController {
                         String sportName = getSportType();
                         String fullName = getFullName();
 
-                        amountOfDeletedPatients = tournamentsTableModel.deleteByFullNameOrSportType(fullName, sportName);
+                        amountOfDeletedTournaments = tournamentsTableModel.deleteByFullNameOrSportType(fullName, sportName);
                     } else if (deleteType.equals(Parameters.SEARCH_TYPES[1])) {
                         String prizeUpper = getPrizeUpper();
                         String incomeUpper = getIncomeUpper();
                         String prizeLower = getPrizeLower();
                         String incomeLower = getIncomeLower();
 
-                        amountOfDeletedPatients = tournamentsTableModel.deleteByPrizeOrIncome(prizeUpper, incomeUpper, prizeLower, incomeLower);
+                        amountOfDeletedTournaments = tournamentsTableModel.deleteByPrizeOrIncome(prizeUpper, incomeUpper, prizeLower, incomeLower);
                     } else if (deleteType.equals(Parameters.SEARCH_TYPES[2])) {
                         String tournamentName = getTournamentName();
                         DateManager dateOfTournament = new DateManager(getDateOfTournament());
 
-                        amountOfDeletedPatients = tournamentsTableModel.tournamentNameOrDate(tournamentName, dateOfTournament);
+                        amountOfDeletedTournaments = tournamentsTableModel.tournamentNameOrDate(tournamentName, dateOfTournament);
                     }
 
                     SwingUtilities.getWindowAncestor(deleteButton).dispose();
-                    Alert.deletionAlert(amountOfDeletedPatients);
+                    Alert.deletionAlert(amountOfDeletedTournaments);
                 } catch (EmptyFieldException exception) {
                     Alert.unknownTypeAlert();
                 }

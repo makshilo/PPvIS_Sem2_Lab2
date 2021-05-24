@@ -14,20 +14,16 @@ public class TableBuilder {
         this.tableScrollPane = new JScrollPane(table);
 
         setTableInfo(model);
-        setScrollPane();
-    }
-
-    private void setScrollPane() {
-        //tableScrollPane.setPreferredSize(new Dimension(700, 400));
     }
 
     private void setTableInfo(TournamentsTableModel model) {
         table.setModel(model);
         table.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
-        table.getTableHeader().setBackground(new Color(32, 136, 203, 0));
-        table.getTableHeader().setForeground(new Color(255, 255, 255, 0));
-        table.setGridColor(new Color(100, 100, 100, 0));
-       // table.setPreferredSize(new Dimension(700, 200));
+        table.getTableHeader().setResizingAllowed(false);
+        table.getTableHeader().setReorderingAllowed(false);
+        table.getTableHeader().setBackground(new Color(150,190,100, 255));
+        table.getTableHeader().setForeground(new Color(255, 255, 255, 255));
+        table.setGridColor(new Color(100, 100, 100, 255));
     }
 
     public JTable getTable() {

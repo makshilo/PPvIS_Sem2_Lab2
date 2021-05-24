@@ -5,10 +5,10 @@ public class Tournament {
     private String sportName;
     private String fullName;
     private DateManager tournamentDate;
-    private double prize;
-    private double income;
+    private Double prize;
+    private Double income;
 
-    public Tournament(String tournamentName, String sportName, String fullName, DateManager tournamentDate, int prize) {
+    public Tournament(String tournamentName, String sportName, String fullName, DateManager tournamentDate, Double prize) {
         this.tournamentName = tournamentName;
         this.sportName = sportName;
         this.fullName = fullName;

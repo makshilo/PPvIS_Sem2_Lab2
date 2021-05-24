@@ -7,7 +7,6 @@ public class Parameters {
     public static Object[][] defaultData = {
 
     };
-    //todo
     public static final String[] SEARCH_TYPES = {"Sport name or winner's name", "Prize or income", "Tournament name or date"};
     public static final String[] SPORT_TYPES = {"soccer", "basketball", "tennis", "baseball", "golf", "running",
             "volleyball", "badminton", "swimming", "boxing", "table tennis", "skiing", "ice skating", "roller skating",

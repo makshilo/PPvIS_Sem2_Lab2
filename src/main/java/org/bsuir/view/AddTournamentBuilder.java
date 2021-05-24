@@ -59,13 +59,13 @@ public class AddTournamentBuilder {
     }
 
     private void addDateComponents() {
-        UtilDateModel dateOfBirthModel = new UtilDateModel();
-        JDatePanelImpl dateOfBirthPanel = new JDatePanelImpl(dateOfBirthModel, new Properties());
-        JDatePickerImpl dateOfBirthPicker = new JDatePickerImpl(dateOfBirthPanel, new DateLabelFormatter());
+        UtilDateModel tournamentDate = new UtilDateModel();
+        JDatePanelImpl tournamentDatePanel = new JDatePanelImpl(tournamentDate, new Properties());
+        JDatePickerImpl tournamentDatePicker = new JDatePickerImpl(tournamentDatePanel, new DateLabelFormatter());
 
-        datePanels[0] = dateOfBirthPanel;
+        datePanels[0] = tournamentDatePanel;
 
-        datePickers[0] = dateOfBirthPicker;
+        datePickers[0] = tournamentDatePicker;
     }
 
     private void setVerticalLayout(GroupLayout layout) {
@@ -84,7 +84,7 @@ public class AddTournamentBuilder {
                 .addComponent(labelItems[2])
                 .addComponent(textFields[2])
                 .addComponent(labelItems[3])
-                .addComponent(textFields[3])
+                .addComponent(textFields[1])
                 .addComponent(enterButton)
         );
     }
@@ -99,7 +99,7 @@ public class AddTournamentBuilder {
                         .addComponent(labelItems[2])
                         .addComponent(textFields[2])
                         .addComponent(labelItems[3])
-                        .addComponent(textFields[3])
+                        .addComponent(textFields[1])
                         .addComponent(enterButton))
                 .addGroup(layout.createParallelGroup()
                         .addComponent(labelItems[4])
@@ -109,29 +109,27 @@ public class AddTournamentBuilder {
     }
 
     private void addTextFields() {
+        JTextField tournamentNameTextField = new JTextField();
         JTextField fullNameTextField = new JTextField();
-        JTextField addressTextField = new JTextField();
-        JTextField doctorsNameTextField = new JTextField();
-        JTextField conclusionTextField = new JTextField();
+        JTextField awardTextField = new JTextField();
 
-        textFields[0] = fullNameTextField;
-        textFields[1] = addressTextField;
-        textFields[2] = doctorsNameTextField;
-        textFields[3] = conclusionTextField;
+        textFields[0] = tournamentNameTextField;
+        textFields[1] = fullNameTextField;
+        textFields[2] = awardTextField;
     }
 
     private void addLabels() {
-        JLabel fullNameLabel = new JLabel("Tournament name");
-        JLabel addressLabel = new JLabel("Sports name");
-        JLabel doctorsNameLabel = new JLabel("Full name");
-        JLabel conclusionLabel = new JLabel("Award");
-        JLabel dateOfBirthLabel = new JLabel("Date of tournament");
+        JLabel tournamentNameLabel = new JLabel("Tournament name");
+        JLabel sportTypeLabel = new JLabel("Sports type");
+        JLabel fullNameLabel = new JLabel("Full name");
+        JLabel awardLabel = new JLabel("Award");
+        JLabel dateOfTournamentLabel = new JLabel("Date of tournament");
 
-        labelItems[0] = fullNameLabel;
-        labelItems[1] = addressLabel;
-        labelItems[2] = doctorsNameLabel;
-        labelItems[3] = conclusionLabel;
-        labelItems[4] = dateOfBirthLabel;
+        labelItems[0] = tournamentNameLabel;
+        labelItems[1] = sportTypeLabel;
+        labelItems[2] = fullNameLabel;
+        labelItems[3] = awardLabel;
+        labelItems[4] = dateOfTournamentLabel;
     }
 
     public JDatePanelImpl[] getDatePanels() {

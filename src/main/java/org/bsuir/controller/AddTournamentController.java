@@ -42,11 +42,9 @@ public class AddTournamentController {
             public void actionPerformed(ActionEvent e) {
                 getInformation();
 
-
                 addTournamentToModel();
                 SwingUtilities.getWindowAncestor(enterButton).dispose();
                 Alert.successfulAddingAlert();
-
             }
         });
     }
@@ -78,7 +76,7 @@ public class AddTournamentController {
         DateManager tournamentDate = new DateManager((Date) datePanels[0].getModel().getValue());
 
         String fullName = textFields[2].getText();
-        String prize = textFields[3].getText();
-        tournament = new Tournament(tournamentName, sportsName, fullName, tournamentDate, Integer.parseInt(prize));
+        Double prize = Double.valueOf(textFields[1].getText());
+        tournament = new Tournament(tournamentName, sportsName, fullName, tournamentDate, prize);
     }
 }
