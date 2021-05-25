@@ -83,10 +83,21 @@ public class DeleteTournamentController {
                         amountOfDeletedTournaments = tournamentsTableModel.deleteByFullNameOrSportType(fullName, sportName);
                     } else if (deleteType.equals(Parameters.SEARCH_TYPES[1])) {
                         String prizeUpper = getPrizeUpper();
+                        if(prizeUpper.isEmpty()){
+                            prizeUpper = "0";
+                        }
                         String incomeUpper = getIncomeUpper();
+                        if(incomeUpper.isEmpty()){
+                            incomeUpper = "0";
+                        }
                         String prizeLower = getPrizeLower();
+                        if(prizeLower.isEmpty()) {
+                            prizeLower = "0";
+                        }
                         String incomeLower = getIncomeLower();
-
+                        if(incomeLower.isEmpty()){
+                            incomeLower = "0";
+                        }
                         amountOfDeletedTournaments = tournamentsTableModel.deleteByPrizeOrIncome(prizeUpper, incomeUpper, prizeLower, incomeLower);
                     } else if (deleteType.equals(Parameters.SEARCH_TYPES[2])) {
                         String tournamentName = getTournamentName();
