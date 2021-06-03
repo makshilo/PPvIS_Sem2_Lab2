@@ -6,6 +6,7 @@ import org.bsuir.model.Tournament;
 import org.bsuir.view.Alert;
 import org.bsuir.view.DeleteTournamentBuilder;
 import org.jdatepicker.impl.JDatePanelImpl;
+import org.bsuir.exception.EmptyFieldException;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -40,11 +41,16 @@ public class AddTournamentController {
         enterButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getInformation();
-
-                addTournamentToModel();
-                SwingUtilities.getWindowAncestor(enterButton).dispose();
-                Alert.successfulAddingAlert();
+                try {
+                    getInformation();
+                    if (informationCorrect()) {
+                        addTournamentToModel();
+                        SwingUtilities.getWindowAncestor(enterButton).dispose();
+                        Alert.successfulAddingAlert();
+                    }
+                } catch (EmptyFieldException exception) {
+                    Alert.unsuccessfulAddingAlert("Award is an int value");
+                }
             }
         });
     }
@@ -70,13 +76,17 @@ public class AddTournamentController {
         return true;
     }
 
-    private void getInformation() {
+    private void getInformation() throws EmptyFieldException {
         String tournamentName = textFields[0].getText();
         String sportsName = Objects.requireNonNull(comboBox.getSelectedItem()).toString();
         DateManager tournamentDate = new DateManager((Date) datePanels[0].getModel().getValue());
 
         String fullName = textFields[2].getText();
-        Double prize = Double.valueOf(textFields[1].getText());
-        tournament = new Tournament(tournamentName, sportsName, fullName, tournamentDate, prize);
+        try {
+            Double prize = Double.valueOf(textFields[1].getText());
+            tournament = new Tournament(tournamentName, sportsName, fullName, tournamentDate, prize);
+        } catch (NumberFormatException exception) {
+            throw new EmptyFieldException("Int should be numeric value");
+        }
     }
 }
